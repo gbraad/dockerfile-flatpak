@@ -4,7 +4,7 @@ Flatpak
 !["Prompt"](https://raw.githubusercontent.com/gbraad/assets/gh-pages/icons/prompt-icon-64.png)
 
 
-Docker container a test environment with [Flatpak](http://flatpak.org) installed.
+Docker container of a test environment with [Flatpak](http://flatpak.org) installed.
 
 Available as an [automated build](https://hub.docker.com/r/gbraad/flatpak/) from the Docker registry.
 
