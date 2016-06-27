@@ -5,13 +5,11 @@
 
 # Install dependencies
 dnf install -y \
-    flatpak
+    flatpak \
+    ansible
 
-# Setup remotes
-cd /tmp
-curl -sSL https://sdk.gnome.org/keys/gnome-sdk.gpg > gnome-sdk.gpg
-flatpak remote-add --gpg-import=gnome-sdk.gpg gnome https://sdk.gnome.org/repo/
-flatpak remote-add --gpg-import=gnome-sdk.gpg gnome-apps https://sdk.gnome.org/repo-apps/
+curl -sSL https://raw.githubusercontent.com/gbraad/ansible-playbooks/master/playbooks/install-flatpak.yml -o /tmp/install-flatpak.yml
+ansible-playbook /tmp/flatpak.yml
 
 # Clean up
 dnf clean all
