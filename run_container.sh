@@ -6,7 +6,8 @@
 # Install dependencies
 dnf install -y \
     flatpak \
-    ansible
+    ansible \
+    python2-dnf
 
 curl -sSL https://raw.githubusercontent.com/gbraad/ansible-playbooks/master/playbooks/install-flatpak.yml -o /tmp/install-flatpak.yml
 ansible-playbook /tmp/flatpak.yml
