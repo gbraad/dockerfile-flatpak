@@ -9,8 +9,8 @@ dnf install -y \
     ansible \
     python2-dnf
 
-curl -sSL https://raw.githubusercontent.com/gbraad/ansible-playbooks/master/playbooks/install-flatpak.yml -o /tmp/install-flatpak.yml
 ansible-playbook /tmp/install-flatpak.yml
+ansible-playbook /tmp/create-flatpak-hello.yml
 
 # Clean up
 dnf clean all

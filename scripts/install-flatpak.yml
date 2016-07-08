@@ -1,0 +1,27 @@
+#!/usr/bin/env ansible-playbook
+---
+- hosts: localhost
+
+  tasks:
+  - name: Install 'flatpak'
+    package: name=flatpak state=installed
+    become: yes
+    become_method: sudo
+
+  - name: Download 'gnome-sdk' key file
+    get_url: url=https://sdk.gnome.org/keys/gnome-sdk.gpg dest=/tmp/gnome-sdk.gpg
+
+  - name: Add remote 'gnome'
+    command: flatpak remote-add --gpg-import=/tmp/gnome-sdk.gpg gnome https://sdk.gnome.org/repo/
+
+  - name: Add remote 'gnome-apps'
+    command: flatpak remote-add --gpg-import=/tmp/gnome-sdk.gpg gnome-apps https://sdk.gnome.org/repo-apps/
+
+  - name: From 'gnome' add '3.20 runtime'
+    command: flatpak install gnome org.gnome.Platform 3.20
+
+  - name: From 'gnome-apps' add 'gedit'
+    command: flatpak install gnome-apps org.gnome.gedit stable
+
+#  - name: Run 'gedit'
+#    command: flatpak run org.gnome.gedit

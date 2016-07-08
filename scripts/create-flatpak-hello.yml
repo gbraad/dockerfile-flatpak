@@ -1,0 +1,40 @@
+#!/usr/bin/env ansible-playbook
+---
+- hosts: localhost
+
+  tasks:
+  - name: Create directory structure
+    file: path="{{ item }}" state=directory mode=750
+    with_items:
+    - "{{ ansible_env.HOME }}/hello"
+    - "{{ ansible_env.HOME }}/hello/files"
+    - "{{ ansible_env.HOME }}/hello/files/bin"
+    - "{{ ansible_env.HOME }}/hello/export"
+
+  - name: Create 'hello.sh'
+    template: >-
+      src=/tmp/hello/hello.sh.j2
+      dest="{{ ansible_env.HOME }}/hello/files/bin/hello.sh"
+      mode=750
+
+  - name: Create 'metadata'
+    template: >-
+      src=/tmp/hello/metadata.j2
+      dest="{{ ansible_env.HOME }}/hello/metadata"
+      mode=640
+
+  - name: Export 'hello' to repo
+    command: >-
+      chdir="{{ ansible_env.HOME }}"
+      flatpak build-export repo hello
+
+  - name: Add remote 'tutorial-repo'
+    command: >-
+      chdir="{{ ansible_env.HOME }}"
+      flatpak --user remote-add --no-gpg-verify tutorial-repo repo
+
+  - name: From 'tutorial-repo' add 'Hello'
+    command: flatpak --user install tutorial-repo org.test.Hello
+
+  - name: Run 'Hello'
+    command: flatpak run org.test.Hello
