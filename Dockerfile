@@ -7,4 +7,6 @@ COPY hello/      /tmp/hello/
 COPY scripts/    /tmp/
 RUN /tmp/run_container.sh
 
+VOLUME [ "/sys/fs/cgroup", "/tmp", "/run" ]
+
 CMD ["bash"]

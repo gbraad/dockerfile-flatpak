@@ -8,7 +8,6 @@
     become: yes
     become_method: sudo
     with_items:
-    - systemd
     - flatpak
 
   - name: Download 'gnome-sdk' key file
