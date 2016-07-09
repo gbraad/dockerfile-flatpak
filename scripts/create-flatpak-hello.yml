@@ -36,5 +36,5 @@
   - name: From 'tutorial-repo' add 'Hello'
     command: flatpak --user install tutorial-repo org.test.Hello
 
-  - name: Run 'Hello'
-    command: flatpak run org.test.Hello
+#  - name: Run 'Hello'
+#    command: flatpak run org.test.Hello
